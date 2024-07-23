@@ -1,0 +1,8 @@
+.HeaderContainer{
+    display: flex;
+}
+
+.logo{
+    width: 5%;
+    margin: 20px;
+  }
