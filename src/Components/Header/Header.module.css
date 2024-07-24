@@ -1,8 +1,12 @@
-.HeaderContainer{
-    display: flex;
-}
+/* Header.module.css */
 
-.logo{
-    width: 5%;
-    margin: 20px;
+.header {
+    background-color: #ffffff;
+    color: rgb(26, 26, 26);
+    padding: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.048);
   }
+  

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Sidebar.module.css';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
@@ -6,15 +7,14 @@ import logo from '../Assets/Logo.svg';
 
 const Sidebar = ({ children }) => {
   const [expanded, setExpanded] = useState(true);
-
   const toggleSidebar = () => {
     setExpanded(!expanded);
   };
 
   return (
     <div className={`${styles.container} ${expanded ? styles.expanded : styles.collapsed}`}>
-      <nav className={styles.nav}>
-        <aside className={`${styles.sidebar} ${expanded ? styles.expanded : styles.collapsed}`}>
+      <aside className={`${styles.sidebar} ${expanded ? styles.expanded : styles.collapsed}`}>
+        <nav className={styles.nav}>
           <div className={styles.logoContainer}>
             <img src={logo} alt="logo" className={styles.logo} />
             <button className={styles.toggleButton} onClick={toggleSidebar}>
@@ -22,21 +22,39 @@ const Sidebar = ({ children }) => {
             </button>
           </div>
           <ul className={styles.children}>
-            {children}
+            {React.Children.map(children, child => 
+              React.cloneElement(child, { expanded })
+            )}
           </ul>
-        </aside>
-      </nav>
+          <div className={styles.nameLink}>
+            <span className={styles.bottomText}>Deluxe Promotion</span>
+            <span className={styles.bottomText}>CRM System 2024</span>
+          </div>
+        </nav>
+      </aside>
     </div>
   );
 };
 
-export function SidebarItem({ icon, text, active, alert }) {
+export function SidebarItem({ icon, text, path, expanded, alert }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isActive = location.pathname === path;
+
+  const handleClick = () => {
+    navigate(path);
+  };
+
   return (
-    <li className={`${styles.list} ${active ? styles.active : ''} ${alert ? styles.alert : ''}`}>
+    <li 
+      className={`${styles.list} ${isActive ? styles.active : styles.deactive} ${alert ? styles.alert : ''}`}
+      onClick={handleClick}
+    >
       {icon}
-      <span className={`${styles.text} ${!active ? styles.hidden : ''}`}>
+      <span className={`${styles.text} ${expanded && isActive ? '' : styles.hidden}`}>
         {text}
       </span>
+      {alert && <div className={styles.alert}></div>}
     </li>
   );
 }
