@@ -1,0 +1,71 @@
+.main {
+    margin: 20px;
+}
+.separate {
+    display: flex;
+    justify-content: space-between;
+}
+.container {
+    background: #fff;
+    width: 30%;
+    padding: 30px 40px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.082); /* Enhanced shadow for more blur */
+    border-radius: 10px;
+}
+
+.incontainer {
+    display: flex;
+    background: #8a30ff;
+    align-items: center;
+    justify-content: space-around;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin-right: 20px;
+}
+.initials{
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.nameType {
+    display: flex;
+    flex-direction: column;
+}
+.header{
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.updateButton {
+    width: 100px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.deleteButton {
+    width: 100px;
+    font-size: 14px;
+    background: rgb(253, 66, 66);
+}
+
+.deleteButton:hover {
+    background: red;
+}
+
+.invoiceContainer{
+    width: 60%;
+    margin-right: 20px;
+}

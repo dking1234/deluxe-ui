@@ -1,0 +1,37 @@
+.tableContainer {
+    background: #fff;
+    padding: 10px;
+}
+
+.addContainer {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    flex-wrap: wrap;
+}
+
+.title {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.importButton {
+    border: 1px solid #1d1186;
+    background: none;
+    color: black;
+    font-size: 14px;
+    width: 100px;
+    margin-right: 20px;
+}
+
+.addButton {
+    font-size: 14px;
+
+}

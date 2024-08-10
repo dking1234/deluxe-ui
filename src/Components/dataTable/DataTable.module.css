@@ -1,0 +1,57 @@
+/* General styles for desktop/table view */
+.dataTable {
+  width: 100%; /* Full width to adapt to screen size */
+  max-width: 800px; /* Optional max-width for larger screens */
+  margin: 0 auto; /* Center horizontally */
+}
+
+.dataGrid {
+  background: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none; /* Remove the border */
+}
+
+.MuiDataGrid-root {
+  border: none; /* Remove the border around the DataGrid */
+}
+
+.MuiDataGrid-toolbarContainer {
+  flex-direction: row-reverse; /* Keep toolbar layout */
+}
+
+.action {
+  display: flex;
+  gap: 15px;
+}
+
+.delete {
+  cursor: pointer;
+}
+
+.MuiDataGrid-row {
+  cursor: pointer; /* Add pointer cursor on row hover */
+}
+
+/* Mobile styles */
+.mobileView {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.cardItem {
+  margin-bottom: 8px;
+}
+
+.cardItem:last-child {
+  margin-bottom: 0;
+}

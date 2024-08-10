@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+}
+
+.tableContainer {
+    width: 100%; /* Adjust width as needed */
+    height: 50vh;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.082); /* Enhanced shadow for more blur */
+    padding: 2rem;
+    transition: box-shadow 0.3s ease; /* Smooth transition for shadow on hover */
+}
+
+.title {
+    color: rgb(189, 189, 189);
+    font-size: 19px;
+    font-weight: medium;
+    margin: auto;
+}

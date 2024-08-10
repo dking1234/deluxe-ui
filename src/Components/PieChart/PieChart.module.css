@@ -1,0 +1,58 @@
+.container {
+  width: 100%; /* Full width to ensure responsiveness */
+  max-width: 450px; /* Maximum width for larger screens */
+  height: auto; /* Height will be adjusted based on content */
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.082); /* Enhanced shadow for more blur */
+  padding: 1rem; /* Adjusted padding for smaller screens */
+  transition: box-shadow 0.3s ease; 
+  margin-bottom: 10px;
+}
+
+.title {
+  margin-bottom: 1rem; /* Adjusted margin for smaller screens */
+}
+
+.pieTitle {
+  font-size: 1.2rem; /* Adjusted font size for smaller screens */
+  font-weight: medium;
+  color: #adadad;
+}
+
+.chartDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem; /* Adjusted padding for medium screens */
+  }
+
+  .pieTitle {
+    font-size: 1rem; /* Adjusted font size for medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem; /* Reduced padding for small screens */
+  }
+
+  .pieTitle {
+    font-size: 0.9rem; /* Further reduced font size for small screens */
+  }
+
+  .chart {
+    width: 100%;
+  }
+}

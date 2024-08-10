@@ -1,12 +1,83 @@
-/* Header.module.css */
-
 .header {
-    background-color: #ffffff;
-    color: rgb(26, 26, 26);
-    padding: 0.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: rgba(0, 0, 0, 0.048);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 0 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  height: 60px; /* Adjust height as needed */
+  flex-wrap: nowrap; /* Ensure items don't wrap by default */
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  flex: 1; /* Ensure this section takes available space */
+}
+
+.welcomeText {
+  font-size: 1.2rem; /* Adjusted font size for larger screens */
+  font-weight: 500;
+  color: #333;
+  margin-left: 1rem; /* Adjusted margin for spacing */
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  flex: 1; /* Ensure this section takes available space */
+  justify-content: flex-end;
+}
+
+.searchContainer {
+  position: relative;
+  margin-right: 1rem; /* Spacing for the search container */
+  display: flex; /* Ensure the search container is a flex item */
+}
+
+.searchInput {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.5rem 2rem 0.5rem 2.5rem;
+  width: 200px; /* Adjusted width for larger screens */
+  font-size: 0.9rem; /* Adjusted font size for larger screens */
+}
+
+.searchIcon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.iconButton {
+  margin-left: 0.5rem; /* Spacing for icon buttons */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    height: auto; /* Allow height to adjust based on content */
   }
-  
+
+  .welcomeText {
+    font-size: 1rem; /* Further reduced font size for smaller screens */
+    margin-left: 0; /* Remove margin on smaller screens */
+  }
+
+  .searchContainer {
+    display: none; /* Hide the search container on small screens */
+  }
+
+  .iconButton {
+    margin-left: 0.5rem; /* Adjusted margin for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .searchInput {
+    width: 100px; /* Further reduced width for very small screens */
+    font-size: 0.8rem; /* Further reduced font size for very small screens */
+  }
+}

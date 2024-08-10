@@ -1,0 +1,36 @@
+.container {
+  width: 100%; /* Full width to adapt to screen size */
+  max-width: 800px; /* Optional max-width for larger screens */
+  height: 280px; /* Fixed height for consistency */
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.082); /* Enhanced shadow for more blur */
+  padding: 3rem 2rem; /* Adjust padding for smaller screens */
+  transition: box-shadow 0.3s ease; /* Smooth transition for shadow on hover */
+  margin: 0 auto; /* Center horizontally */
+}
+
+.title {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: medium;
+  color: #adadad;
+}
+
+.chartContainer {
+  display: flex;
+  justify-content: center;
+  height: 100%; /* Full height for the container */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    height: 250px; /* Adjust height for smaller screens */
+    padding: 1rem; /* Adjust padding for smaller screens */
+  }
+
+  .title {
+    font-size: 16px; /* Adjust font size for smaller screens */
+  }
+}
