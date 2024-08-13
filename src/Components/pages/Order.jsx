@@ -87,7 +87,7 @@ const Orders = () => {
         <span className={styles.title}>Job Order</span>
         <div className={styles.buttons}>
           <button className={styles.importButton} onClick={handleAddFormClick}>Import CSV</button>
-          <button className={styles.addButton} onClick={handleAddFormClick}>Add Order</button>
+          <button className={styles.addButton} onClick={handleAddFormClick}>Add Job Order</button>
         </div>
       </div>
       {showAddForm && (
@@ -96,6 +96,7 @@ const Orders = () => {
           apiEndpoint="http://localhost:5000/api/orders"
           onClose={handleCloseAddForm}
           token={localStorage.getItem('token')}
+          formTitle="Add Job Order"
         />
       )}
       <div className={styles.tableContainer}>

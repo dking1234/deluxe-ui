@@ -52,7 +52,9 @@ const DeliveryNote = () => {
         }
       });
       const transformedRows = response.data.map((item, index) => ({
-        id: index + 1, // Generate a unique numeric ID
+        id: item._id, // Use the actual ID from the backend
+        sequence: index + 1, // Use a separate 'sequence' field for display
+        ...item,
         fromCompanyName: item.from.companyName,
         toCustomerName: item.to.name, 
         items: item.items,
@@ -104,6 +106,7 @@ const DeliveryNote = () => {
           apiEndpoint="http://localhost:5000/api/delivery/delivery-notes"
           onClose={handleCloseAddForm}
           token={localStorage.getItem('token')}
+          formTitle="Add Delivery Note"
         />
       )}
       <div className={styles.tableContainer}>

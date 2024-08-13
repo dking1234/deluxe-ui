@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Sidebar.module.css';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-
 import logo from '../Assets/Logo.svg';
 
 const Sidebar = ({ children }) => {
@@ -17,9 +15,6 @@ const Sidebar = ({ children }) => {
         <nav className={styles.nav}>
           <div className={styles.logoContainer}>
             <img src={logo} alt="logo" className={styles.logo} />
-            <button className={styles.toggleButton} onClick={toggleSidebar}>
-              {expanded ? <ArrowLeft /> : <ArrowRight />}
-            </button>
           </div>
           <ul className={styles.children}>
             {React.Children.map(children, child => 

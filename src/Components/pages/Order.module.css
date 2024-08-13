@@ -35,3 +35,7 @@
     font-size: 14px;
 
 }
+
+.importButton:hover {
+    color: white;
+}

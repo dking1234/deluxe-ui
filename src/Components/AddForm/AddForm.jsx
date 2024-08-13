@@ -1,9 +1,10 @@
+
 // AddForm.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './AddForm.module.css'; // Create and adjust styles as needed
 
-const AddForm = ({ fields, apiEndpoint, onClose, token }) => {
+const AddForm = ({ fields, apiEndpoint, onClose, token, formTitle }) => {
   const initialState = fields.reduce((acc, field) => {
     acc[field.name] = field.defaultValue || '';
     return acc;
@@ -34,7 +35,7 @@ const AddForm = ({ fields, apiEndpoint, onClose, token }) => {
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         <span className={styles.close} onClick={onClose}>&times;</span>
-        <h2>Add Item</h2>
+        <h2>{formTitle}</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
           {fields.map((field) => {
             if (field.name === 'totalPurchases') return null; // Skip rendering totalPurchases field

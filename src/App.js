@@ -22,12 +22,15 @@ import EmployeDetails from './Components/DetailPages/EmployeeDetails/EmployeDeta
 import OrderDetails from './Components/DetailPages/JobOrderDetails/JobOrderDetails';
 import QuotationsDetails from './Components/DetailPages/QuotationDetails/QuotationsDetails';
 import InvoiceDetails from './Components/DetailPages/InvoiceDetails/InvoiceDetails';
+import DeliveryNoteDetails from './Components/DetailPages/DeliveryNoteDetails/DeliveryNoteDetails';
+
 
 import { LayoutDashboard, User, Users, Package, FileText, Calendar, Receipt } from 'lucide-react';
 
 import PrivateRoute from './config/PrivateRoute';
 import Notification from './Components/Notification/Notification';
 import { Profile } from './Components/Profile/Profile';
+import Items from './Components/pages/Items';
 
 function App() {
   return (
@@ -44,8 +47,9 @@ function App() {
                     <SidebarItem icon={<LayoutDashboard size={30} />} text="Dashboard" path="/admin-dashboard" />
                     <SidebarItem icon={<User size={30} />} text="Customer" path="/customer" alert />
                     <SidebarItem icon={<Users size={30} />} text="Employee" path="/employee" />
-                    <SidebarItem icon={<Package size={30} />} text="Job Order" path="/order" />
+                    <SidebarItem icon={<Users size={30} />} text="Items" path="/items" />
                     <SidebarItem icon={<FileText size={30} />} text="Quotation" path="/quotes" alert />
+                    <SidebarItem icon={<Package size={30} />} text="Job Order" path="/order" />
                     <SidebarItem icon={<Calendar size={30} />} text="Tax Invoice" path="/invoice" />
                     <SidebarItem icon={<Receipt size={30} />} text="DeliveryNote" path="/deliveryNote" />
                     <SidebarItem icon={<FileText size={30} />} text="Accounts" path="/accounts" alert />
@@ -57,6 +61,7 @@ function App() {
                         <Route path="/admin-dashboard" element={<AdminDashboard />} />
                         <Route path="/customer" element={<Customer />} />
                         <Route path="/employee" element={<Employee />} />
+                        <Route path="/items" element={<Items />} />
                         <Route path="/order" element={<Order />} />
                         <Route path="/quotes" element={<Quotation />} />
                         <Route path="/invoice" element={<Invoice />} />
@@ -70,6 +75,7 @@ function App() {
                         <Route path="/invoices/:id" element={<InvoiceDetails />} />
                         <Route path="/notifications" element={<Notification />} />
                         <Route path="/profile" element={<Profile />} />
+                        <Route path="/delivery-notes/:id" element={<DeliveryNoteDetails />} />
                       </Routes>
                     </div>
                   </div>

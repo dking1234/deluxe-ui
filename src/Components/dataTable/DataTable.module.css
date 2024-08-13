@@ -1,7 +1,7 @@
 /* General styles for desktop/table view */
 .dataTable {
   width: 100%; /* Full width to adapt to screen size */
-  max-width: 800px; /* Optional max-width for larger screens */
+  max-width: 1500px; /* Optional max-width for larger screens */
   margin: 0 auto; /* Center horizontally */
 }
 

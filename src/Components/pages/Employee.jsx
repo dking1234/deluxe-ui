@@ -1,4 +1,3 @@
-// Employee.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import DataTable from '../dataTable/DataTable'; // Adjust the import path as necessary
@@ -70,25 +69,26 @@ const Employee = () => {
 
   return (
     <div className={styles.container}>
-    <div className={styles.addContainer}>
-    <span className={styles.title}>Employee Data</span>
-    <div className={styles.buttons}>
-    <button className={styles.importButton} onClick={handleAddFormClick}>Import CSV</button>
-    <button className={styles.addButton} onClick={handleAddFormClick}>Add Employee</button>
+      <div className={styles.tableContainer}>
+      <div className={styles.addContainer}>
+        <span className={styles.title}>Employees</span>
+        <div className={styles.buttons}>
+          <button className={styles.importButton} onClick={handleAddFormClick}>Import CSV</button>
+          <button className={styles.addButton} onClick={handleAddFormClick}>Add Employees</button>
+        </div>
+      </div>
+        {showAddForm && (
+          <AddForm
+            fields={employeeFields}
+            apiEndpoint="http://localhost:5000/api/users/register"
+            onClose={handleCloseAddForm}
+            token={localStorage.getItem('token')}
+            formTitle="Add Employees"
+          />
+        )}
+        <DataTable columns={columns} rows={rows} slug="employee" />
+      </div>
     </div>
-    </div>
-    {showAddForm && (
-      <AddForm
-        fields={employeeFields}
-        apiEndpoint="http://localhost:5000/api/users/register"
-        onClose={handleCloseAddForm}
-        token={localStorage.getItem('token')}
-      />
-    )}
-    <div className={styles.tableContainer}>
-      <DataTable columns={columns} rows={rows} slug="employee" />
-    </div>
-  </div>
   );
 };
 
