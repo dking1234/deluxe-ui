@@ -20,7 +20,7 @@
 
   const quotationFields = [
     { name: 'customer', label: 'Customer', type: 'select', required: true, apiEndpoint: 'http://localhost:5000/api/customer' },
-    { name: 'items', label: 'Items', type: 'dynamic', required: true },
+    { name: 'items', label: 'Items', type: 'dynamic', required: true, apiEndpoint: 'http://localhost:5000/api/item' },
     { name: 'issueDate', label: 'Issue Date', type: 'date', required: true },
     { name: 'expirationDate', label: 'Expiration Date', type: 'date', required: true },
     { name: 'notes', label: 'Notes', type: 'textarea' },

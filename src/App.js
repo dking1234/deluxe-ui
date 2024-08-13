@@ -25,7 +25,7 @@ import InvoiceDetails from './Components/DetailPages/InvoiceDetails/InvoiceDetai
 import DeliveryNoteDetails from './Components/DetailPages/DeliveryNoteDetails/DeliveryNoteDetails';
 
 
-import { LayoutDashboard, User, Users, Package, FileText, Calendar, Receipt } from 'lucide-react';
+import { LayoutDashboard, User, Users, Package, Clipboard, FileText, Calendar, Receipt } from 'lucide-react';
 
 import PrivateRoute from './config/PrivateRoute';
 import Notification from './Components/Notification/Notification';
@@ -47,11 +47,11 @@ function App() {
                     <SidebarItem icon={<LayoutDashboard size={30} />} text="Dashboard" path="/admin-dashboard" />
                     <SidebarItem icon={<User size={30} />} text="Customer" path="/customer" alert />
                     <SidebarItem icon={<Users size={30} />} text="Employee" path="/employee" />
-                    <SidebarItem icon={<Users size={30} />} text="Items" path="/items" />
+                    <SidebarItem icon={<Package size={30} />} text="Items" path="/items" />
                     <SidebarItem icon={<FileText size={30} />} text="Quotation" path="/quotes" alert />
-                    <SidebarItem icon={<Package size={30} />} text="Job Order" path="/order" />
-                    <SidebarItem icon={<Calendar size={30} />} text="Tax Invoice" path="/invoice" />
-                    <SidebarItem icon={<Receipt size={30} />} text="DeliveryNote" path="/deliveryNote" />
+                    <SidebarItem icon={<Clipboard size={30} />} text="Job Order" path="/order" />
+                    <SidebarItem icon={<Receipt size={30} />} text="Tax Invoice" path="/invoice" />
+                    <SidebarItem icon={<Calendar size={30} />} text="DeliveryNote" path="/deliveryNote" />
                     <SidebarItem icon={<FileText size={30} />} text="Accounts" path="/accounts" alert />
                   </Sidebar>
                   <div className={styles.mainContainer}>

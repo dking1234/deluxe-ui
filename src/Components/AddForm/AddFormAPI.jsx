@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from './AddForm.module.css'; // Create and adjust styles as needed
+import styles from './AddFormAPI.module.css'; 
 
 const AddFormAPI = ({ fields, apiEndpoint, onClose, token, formTitle }) => {
   const initialState = fields.reduce((acc, field) => {
@@ -24,7 +24,7 @@ const AddFormAPI = ({ fields, apiEndpoint, onClose, token, formTitle }) => {
             ...prev,
             [field.name]: response.data.map(item => ({
               value: item._id,
-              label: item.name, // Adjust based on actual API response
+              label: item.name,
             })),
           }));
         } catch (err) {
@@ -43,7 +43,7 @@ const AddFormAPI = ({ fields, apiEndpoint, onClose, token, formTitle }) => {
           ...prev,
           items: response.data.map(item => ({
             value: item._id,
-            label: item.name, // Adjust based on actual API response
+            label: item.name,
           })),
         }));
       } catch (err) {
@@ -86,10 +86,10 @@ const AddFormAPI = ({ fields, apiEndpoint, onClose, token, formTitle }) => {
       await axios.post(apiEndpoint, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      onClose(); // Close the modal after successful submission
+      onClose(); 
     } catch (err) {
-      setError('An error occurred while submitting the form. Please try again.'); // User-friendly error message
-      console.error(err); // Log the error for debugging
+      setError('An error occurred while submitting the form. Please try again.');
+      console.error(err);
     }
   };
 
@@ -97,70 +97,72 @@ const AddFormAPI = ({ fields, apiEndpoint, onClose, token, formTitle }) => {
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         <span className={styles.close} onClick={onClose}>&times;</span>
-        <h2>{formTitle || 'Add Item'}</h2> {/* Dynamic title */}
+        <h2>{formTitle || 'Add Item'}</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
-          {fields.map((field) => {
-            if (field.name === 'items') {
+          <div className={styles.formGrid}>
+            {fields.map((field) => {
+              if (field.type === 'dynamic' && field.name === 'items') {
+                return (
+                  <div key={field.name} className={styles.dynamicFields}>
+                    <label>{field.label}</label>
+                    {formData.items.map((item, index) => (
+                      <div key={index} className={styles.dynamicItem}>
+                        <select
+                          name={`items[${index}].item`}
+                          value={item.item}
+                          onChange={(e) => handleDynamicChange(index, 'item', e.target.value)}
+                          required
+                        >
+                          <option value="">Select Item</option>
+                          {(options.items || []).map(option => (
+                            <option key={option.value} value={option.value}>{option.label}</option>
+                          ))}
+                        </select>
+                        <input
+                          type="number"
+                          name={`items[${index}].quantity`}
+                          value={item.quantity}
+                          onChange={(e) => handleDynamicChange(index, 'quantity', e.target.value)}
+                          placeholder="Quantity"
+                          required
+                        />
+                        <button type="button" onClick={() => handleRemoveItem(index)}>Remove</button>
+                      </div>
+                    ))}
+                    <button type="button" onClick={handleAddItem} className={styles.addButton}>Add Item</button>
+                  </div>
+                );
+              }
+
               return (
-                <div key="items" className={styles.dynamicFields}>
+                <div key={field.name} className={styles.inputGroup}>
                   <label>{field.label}</label>
-                  {formData.items.map((item, index) => (
-                    <div key={index} className={styles.dynamicItem}>
-                      <select
-                        name={`items[${index}].item`}
-                        value={item.item}
-                        onChange={(e) => handleDynamicChange(index, 'item', e.target.value)}
-                        required
-                      >
-                        <option value="">Select Item</option>
-                        {(options.items || []).map(option => (
-                          <option key={option.value} value={option.value}>{option.label}</option>
-                        ))}
-                      </select>
-                      <input
-                        type="number"
-                        name={`items[${index}].quantity`}
-                        value={item.quantity}
-                        onChange={(e) => handleDynamicChange(index, 'quantity', e.target.value)}
-                        placeholder="Quantity"
-                        required
-                      />
-                      <button type="button" onClick={() => handleRemoveItem(index)}>Remove</button>
-                    </div>
-                  ))}
-                  <button type="button" onClick={handleAddItem}>Add Item</button>
+                  {field.type === 'select' ? (
+                    <select
+                      name={field.name}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      required={field.required}
+                    >
+                      <option value="">Select {field.label}</option>
+                      {(options[field.name] || []).map(option => (
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      type={field.type || 'text'}
+                      name={field.name}
+                      placeholder={field.placeholder}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      required={field.required}
+                    />
+                  )}
                 </div>
               );
-            }
-
-            return (
-              <div key={field.name} className={styles.inputGroup}>
-                <label>{field.label}</label>
-                {field.type === 'select' ? (
-                  <select
-                    name={field.name}
-                    value={formData[field.name]}
-                    onChange={handleChange}
-                    required={field.required}
-                  >
-                    <option value="">Select {field.label}</option>
-                    {(options[field.name] || field.options || []).map(option => (
-                      <option key={option.value} value={option.value}>{option.label}</option>
-                    ))}
-                  </select>
-                ) : (
-                  <input
-                    type={field.type || 'text'}
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    value={formData[field.name]}
-                    onChange={handleChange}
-                    required={field.required}
-                  />
-                )}
-              </div>
-            );
-          })}
+            })}
+          </div>
           {error && <div className={styles.error}>{error}</div>}
           <button type="submit">Submit</button>
         </form>

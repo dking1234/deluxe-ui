@@ -1,15 +1,13 @@
-
-// AddForm.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
-import styles from './AddForm.module.css'; // Create and adjust styles as needed
+import styles from './AddForm.module.css'; // Import the updated styles
 
 const AddForm = ({ fields, apiEndpoint, onClose, token, formTitle }) => {
   const initialState = fields.reduce((acc, field) => {
     acc[field.name] = field.defaultValue || '';
     return acc;
   }, {});
-  
+
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState('');
 
@@ -68,7 +66,9 @@ const AddForm = ({ fields, apiEndpoint, onClose, token, formTitle }) => {
             );
           })}
           {error && <div className={styles.error}>{error}</div>}
-          <button type="submit">Submit</button>
+          <div className={styles.buttonGroup}>
+            <button type="submit">Submit</button>
+          </div>
         </form>
       </div>
     </div>

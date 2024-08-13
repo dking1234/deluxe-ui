@@ -1,0 +1,67 @@
+/* Container for the entire details page */
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title styling */
+  .title {
+    font-size: 2rem;
+    color: #333;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Styling for the order details */
+  .details {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .details p {
+    margin: 10px 0;
+  }
+  
+  /* Label for details */
+  .details strong {
+    color: #007BFF;
+  }
+  
+  /* Items list */
+  .items {
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .itemsTitle {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+  
+    .title {
+      font-size: 1.5rem;
+    }
+  }
+  

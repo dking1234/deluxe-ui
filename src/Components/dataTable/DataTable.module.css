@@ -3,6 +3,7 @@
   width: 100%; /* Full width to adapt to screen size */
   max-width: 1500px; /* Optional max-width for larger screens */
   margin: 0 auto; /* Center horizontally */
+  border-radius: 10px;
 }
 
 .dataGrid {
