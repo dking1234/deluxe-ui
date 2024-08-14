@@ -15,7 +15,6 @@ import Order from './Components/pages/Order';
 import Quotation from './Components/pages/Quotation';
 import DeliveryNote from './Components/DeliveryNote/DeliveryNote';
 import Transaction from './Components/pages/Transactions';
-import Accounts from './Components/pages/Accounts';
 import SelectRole from './Components/LoginSignup/SelectRole';
 import CustomerDetails from './Components/DetailPages/CustomerDetails/CustomerDetails';
 import EmployeDetails from './Components/DetailPages/EmployeeDetails/EmployeDetails';
@@ -52,7 +51,6 @@ function App() {
                     <SidebarItem icon={<Clipboard size={30} />} text="Job Order" path="/order" />
                     <SidebarItem icon={<Receipt size={30} />} text="Tax Invoice" path="/invoice" />
                     <SidebarItem icon={<Calendar size={30} />} text="DeliveryNote" path="/deliveryNote" />
-                    <SidebarItem icon={<FileText size={30} />} text="Accounts" path="/accounts" alert />
                   </Sidebar>
                   <div className={styles.mainContainer}>
                     <Header className={styles.header} /> {/* Header does not need userId prop if it's coming from context */}
@@ -67,7 +65,6 @@ function App() {
                         <Route path="/invoice" element={<Invoice />} />
                         <Route path="/deliveryNote" element={<DeliveryNote />} />
                         <Route path="/" element={<Transaction />} />
-                        <Route path="/accounts" element={<Accounts />} />
                         <Route path="/customers/:id" element={<CustomerDetails />} />
                         <Route path="/employee/:id" element={<EmployeDetails />} />
                         <Route path="/orders/:id" element={<OrderDetails />} />
@@ -75,7 +72,7 @@ function App() {
                         <Route path="/invoices/:id" element={<InvoiceDetails />} />
                         <Route path="/notifications" element={<Notification />} />
                         <Route path="/profile" element={<Profile />} />
-                        <Route path="/delivery-notes/:id" element={<DeliveryNoteDetails />} />
+                        <Route path="/delivery/:id" element={<DeliveryNoteDetails />} />
                       </Routes>
                     </div>
                   </div>

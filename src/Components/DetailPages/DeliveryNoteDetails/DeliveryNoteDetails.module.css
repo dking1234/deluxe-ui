@@ -1,63 +1,72 @@
-/* DeliveryNoteDetails.module.css */
-
 .container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #f9f9f9;
-  }
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 150px;
+}
+
+.deliveryNoteInfo {
+  text-align: right;
+}
+
+.infoSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.receiverInfo {
+  flex: 1;
+  margin-right: 20px;
   
-  .header {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .logo {
-    width: 200px;
-    margin-bottom: 20px;
-  }
-  
-  .deliveryNoteInfo {
-    text-align: left;
-  }
-  
-  .senderInfo, .receiverInfo, .itemsSection, .detailsSection {
-    margin-bottom: 20px;
-  }
-  
-  .senderInfo h2, .receiverInfo h2, .itemsSection h2, .detailsSection h2 {
-    border-bottom: 2px solid #000;
-    padding-bottom: 10px;
-  }
-  
-  .itemsTable {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .itemsTable th, .itemsTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .itemsTable th {
-    background-color: #98b0ff;
-  }
-  
-  .footer {
-    margin-top: 20px;
-  }
-  
-  .signatureSection {
-    margin-top: 20px;
-  }
-  
-  .signatureSection p {
-    margin: 5px 0;
-  }
-  
+}
+
+.senderInfo {
+  flex: 1;
+  text-align: right;
+  margin-top: 90px;
+}
+
+.itemsSection {
+  margin-top: 20px;
+}
+
+.itemsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.itemsTable th,
+.itemsTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.detailsSection {
+  margin-top: 20px;
+}
+
+.footer {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.signatureSection {
+  flex: 1;
+  text-align: left;
+}

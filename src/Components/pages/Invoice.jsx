@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import DataTable from '../dataTable/DataTable'; // Adjust the import path as necessary
-import AddForm from '../AddForm/AddForm'; // Add this if you want to include functionality to add new invoices
+import AddFormAPI from '../AddForm/AddFormAPI'; // Adjust the import path as necessary
 import styles from './Invoice.module.css'; // Adjust the path or rename as needed
 
 const columns = [
   { field: 'sequence', headerName: 'ID', width: 90 },
   { field: 'invoiceNumber', headerName: 'Invoice Number', width: 150 },
-  { field: 'amount', headerName: 'Amount', width: 110 },
-  { field: 'vatRate', headerName: 'VAT Rate (%)', width: 120 },
-  { field: 'vatAmount', headerName: 'VAT Amount', width: 120 },
+  { field: 'customerName', headerName: 'Customer Name', width: 150 },
+  { field: 'customerAddress', headerName: 'Customer Address', width: 200 },
+  { field: 'customerEmail', headerName: 'Customer Email', width: 200 },
+  { field: 'customerPhone', headerName: 'Customer Phone', width: 150 },
+  { field: 'subtotal', headerName: 'Subtotal', width: 120 },
+  { field: 'tax', headerName: 'Tax', width: 120 },
   { field: 'totalAmount', headerName: 'Total Amount', width: 150 },
   { field: 'status', headerName: 'Status', width: 110 },
   { field: 'issueDate', headerName: 'Issue Date', width: 150 },
@@ -19,15 +22,11 @@ const columns = [
 ];
 
 const invoiceFields = [
-  { name: 'invoiceNumber', label: 'Invoice Number', placeholder: 'Invoice Number', required: true },
-  { name: 'amount', label: 'Amount', placeholder: 'Amount', type: 'number', required: true },
-  { name: 'vatRate', label: 'VAT Rate (%)', placeholder: 'VAT Rate', type: 'number', defaultValue: 18 },
-  { name: 'vatAmount', label: 'VAT Amount', placeholder: 'VAT Amount', type: 'number', required: true },
-  { name: 'totalAmount', label: 'Total Amount', placeholder: 'Total Amount', type: 'number', required: true },
-  { name: 'status', label: 'Status', type: 'select', options: ['Pending', 'Paid', 'Overdue'], placeholder: 'Select Status' },
-  { name: 'issueDate', label: 'Issue Date', placeholder: 'Issue Date', type: 'date' },
-  { name: 'dueDate', label: 'Due Date', placeholder: 'Due Date', type: 'date' },
-  { name: 'notes', label: 'Notes', placeholder: 'Notes' },
+  { name: 'customer', label: 'Customer', type: 'select', required: true, apiEndpoint: 'http://localhost:5000/api/customer' },
+  { name: 'items', label: 'Items', type: 'dynamic', required: true },
+  { name: 'issueDate', label: 'Issue Date', type: 'date', required: true },
+  { name: 'dueDate', label: 'Expiration Date', type: 'date', required: true },
+  { name: 'notes', label: 'Notes', type: 'textarea' },
 ];
 
 const Invoice = () => {
@@ -44,11 +43,24 @@ const Invoice = () => {
           Authorization: `Bearer ${token}`
         }
       });
+
       const transformedRows = response.data.map((item, index) => ({
         id: item._id, // Keep the backend ID for navigation
         sequence: index + 1, // Use a separate 'sequence' field for display
-        ...item,
+        invoiceNumber: item.invoiceNumber,
+        customerName: item.customer?.name || '',
+        customerAddress: item.customer?.address || '',
+        customerEmail: item.customer?.email || '',
+        customerPhone: item.customer?.phone || '',
+        subtotal: item.subtotal,
+        tax: item.tax,
+        totalAmount: item.totalAmount,
+        status: item.status,
+        issueDate: new Date(item.issueDate).toLocaleDateString(),
+        dueDate: new Date(item.dueDate).toLocaleDateString(),
+        notes: item.notes,
       }));
+
       setRows(transformedRows);
     } catch (error) {
       setError('Failed to fetch invoice data. Please try again later.');
@@ -88,11 +100,12 @@ const Invoice = () => {
         </div>
       </div>
       {showAddForm && (
-        <AddForm
+        <AddFormAPI
           fields={invoiceFields}
           apiEndpoint="http://localhost:5000/api/invoices"
           onClose={handleCloseAddForm}
           token={localStorage.getItem('token')}
+          formTitle="Add Invoices"
         />
       )}
       <div className={styles.tableContainer}>
@@ -103,3 +116,4 @@ const Invoice = () => {
 };
 
 export default Invoice;
+  

@@ -53,14 +53,25 @@ const InvoiceDetails = () => {
         </div>
       </header>
       
-      <section className={styles.customerInfo}>
-        <h2>Customer Information</h2>
-        <p><strong>Name:</strong> {invoice.customer?.name || 'N/A'}</p>
-        <p><strong>Address:</strong> {invoice.customer?.address || 'N/A'}</p>
-        <p><strong>Email:</strong> {invoice.customer?.email || 'N/A'}</p>
-        <p><strong>Phone:</strong> {invoice.customer?.phone || 'N/A'}</p>
-        <p><strong>Customer TIN:</strong> {invoice.customer?.customerTIN || 'N/A'}</p>
-        <p><strong>Customer VRN:</strong> {invoice.customer?.customerVRN || 'N/A'}</p>
+      <section className={styles.infoSection}>
+        <div className={styles.customerInfo}>
+          <h2>Customer Information</h2>
+          <p><strong>Name:</strong> {invoice.customer?.name || 'N/A'}</p>
+          <p><strong>Address:</strong> {invoice.customer?.address || 'N/A'}</p>
+          <p><strong>Email:</strong> {invoice.customer?.email || 'N/A'}</p>
+          <p><strong>Phone:</strong> {invoice.customer?.phone || 'N/A'}</p>
+          <p><strong>Customer TIN:</strong> {invoice.customer?.customerTIN || 'N/A'}</p>
+          <p><strong>Customer VRN:</strong> {invoice.customer?.customerVRN || 'N/A'}</p>
+        </div>
+        
+        <div className={styles.companyInfo}>
+          <h2>Company Information</h2>
+          <p><strong>Company Name:</strong> {invoice.company?.companyName || 'N/A'}</p>
+          <p><strong>Phone:</strong> {invoice.company?.phoneNumbers.join(', ') || 'N/A'}</p>
+          <p><strong>Address:</strong> {invoice.company?.address || 'N/A'}</p>
+          <p><strong>Email:</strong> {invoice.company?.email || 'N/A'}</p>
+          <p><strong>TIN:</strong> {invoice.company?.TIN || 'N/A'}</p>
+        </div>
       </section>
       
       <section className={styles.itemsSection}>
@@ -76,14 +87,18 @@ const InvoiceDetails = () => {
           </thead>
           <tbody>
             {invoice.items?.length > 0 ? (
-              invoice.items.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.product || 'N/A'}</td>
-                  <td>{item.quantity || 'N/A'}</td>
-                  <td>${item.unitPrice?.toFixed(2) || 'N/A'}</td>
-                  <td>${item.totalPrice?.toFixed(2) || 'N/A'}</td>
-                </tr>
-              ))
+              invoice.items.map((item, index) => {
+                const unitPrice = item.item?.price || 0;
+                const totalPrice = unitPrice * item.quantity;
+                return (
+                  <tr key={index}>
+                    <td>{item.item?.name || 'N/A'}</td>
+                    <td>{item.quantity || 'N/A'}</td>
+                    <td>${unitPrice.toFixed(2) || 'N/A'}</td>
+                    <td>${totalPrice.toFixed(2) || 'N/A'}</td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td colSpan="4">No items available for this invoice.</td>
@@ -117,9 +132,36 @@ const InvoiceDetails = () => {
         </div>
         
         <div className={styles.paymentInfo}>
-          <p><strong>Account Name:</strong> {invoice.accountName || 'N/A'}</p>
-          <p><strong>Account Number:</strong> {invoice.accountNumber || 'N/A'}</p>
-          <p><strong>Bank Number:</strong> {invoice.bankNumber || 'N/A'}</p>
+          <h2>Payment Information</h2>
+          <div>
+            <h3>Bank Payments</h3>
+            {invoice.company?.payments.length > 0 ? (
+              invoice.company.payments.map((payment, index) => (
+                <div key={index}>
+                  <p><strong>Account Name:</strong> {payment.accountName || 'N/A'}</p>
+                  <p><strong>Bank Name:</strong> {payment.bankName || 'N/A'}</p>
+                  <p><strong>Bank Account:</strong> {payment.accountNumber || 'N/A'}</p>
+                  <p><strong>SWIFT Code:</strong> {payment.swiftCode || 'N/A'}</p>
+                </div>
+              ))
+            ) : (
+              <p>No bank payment details available.</p>
+            )}
+          </div>
+
+          <div>
+            <h3>Mobile Money Payments</h3>
+            {invoice.company?.mobileMoneyPayments.length > 0 ? (
+              invoice.company.mobileMoneyPayments.map((payment, index) => (
+                <div key={index}>
+                  <p><strong>Account Name:</strong> {payment.accountName || 'N/A'}</p>
+                  <p><strong>Merchant Number:</strong> {payment.merchantNumber || 'N/A'}</p>
+                </div>
+              ))
+            ) : (
+              <p>No mobile money payment details available.</p>
+            )}
+          </div>
         </div>
       </section>
     </div>

@@ -12,7 +12,7 @@ const EmployeDetails = () => {
     const fetchCustomerDetails = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:5000/api/users/${id}`, {
+        const response = await axios.get(`http://localhost:5000/api/users/employees/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },    
