@@ -1,20 +1,42 @@
-.container {
-    display: flex;
+.tableContainer {
+    background: #fff;
+    padding: 10px;
 }
 
-.tableContainer {
-    width: 100%; /* Adjust width as needed */
-    height: 50vh;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.082); /* Enhanced shadow for more blur */
-    padding: 2rem;
-    transition: box-shadow 0.3s ease; /* Smooth transition for shadow on hover */
+.addContainer {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    flex-wrap: wrap;
+    border-radius: 20px;
 }
 
 .title {
-    color: rgb(189, 189, 189);
-    font-size: 19px;
-    font-weight: medium;
-    margin: auto;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.importButton {
+    border: 1px solid #1d1186;
+    background: none;
+    color: black;
+    font-size: 14px;
+    width: 100px;
+    margin-right: 20px;
+}
+
+.addButton {
+    font-size: 14px;
+
+}
+
+.importButton:hover {
+    color: white;
 }

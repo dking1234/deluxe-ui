@@ -19,9 +19,9 @@
 .analyticsContainer {
   display: flex;
   margin-top: 40px;
-  margin: 5px;
+  margin: 15px;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .invoiceContainer {
@@ -58,5 +58,6 @@
 
   .analyticsContainer {
     margin-top: 15px;
+    margin: 20px;
   }
 }

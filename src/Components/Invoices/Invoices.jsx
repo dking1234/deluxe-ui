@@ -1,32 +1,91 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import DataTable from '../dataTable/DataTable'; // Adjust the import path as necessary
-import styles from './Invoices.module.css';
+import styles from './Invoices.module.css'; // Adjust the path or rename as needed
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
-  { field: 'date', headerName: 'Date', width: 150 },
-  { field: 'customer', headerName: 'Customer', width: 150 },
-  { field: 'Service', headerName: 'Service', width: 150 },
-  { field: 'amount', headerName: 'Amount', width: 110 },
+  { field: 'sequence', headerName: 'ID', width: 90 },
+  { field: 'invoiceNumber', headerName: 'Invoice Number', width: 150 },
+  { field: 'customerName', headerName: 'Customer Name', width: 150 },
+  { field: 'customerAddress', headerName: 'Customer Address', width: 200 },
+  { field: 'customerEmail', headerName: 'Customer Email', width: 200 },
+  { field: 'customerPhone', headerName: 'Customer Phone', width: 150 },
+  { field: 'subtotal', headerName: 'Subtotal', width: 120 },
+  { field: 'tax', headerName: 'Tax', width: 120 },
+  { field: 'totalAmount', headerName: 'Total Amount', width: 150 },
+  { field: 'status', headerName: 'Status', width: 110 },
+  { field: 'issueDate', headerName: 'Issue Date', width: 150 },
+  { field: 'dueDate', headerName: 'Due Date', width: 150 },
+  { field: 'notes', headerName: 'Notes', width: 200 },
   // Add more columns as needed
 ];
 
-const rows = [
-  { id: 1, date: '2024-07-01', customer: 'John Doe', amount: 200, status: 'Paid' },
-  { id: 2, date: '2024-07-02', customer: 'Jane Smith', amount: 150, status: 'Pending' },
-  { id: 3, date: '2024-07-03', customer: 'Alice Johnson', amount: 250, status: 'Overdue' },
-  // Add more rows as needed
-];
+const Invoice = () => {
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-const Invoices = () => {
+  const fetchInvoiceData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://localhost:5000/api/invoices', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      // Sort invoices by issueDate in descending order and limit to 10
+      const sortedAndLimitedData = response.data
+        .sort((a, b) => new Date(b.issueDate) - new Date(a.issueDate))
+        .slice(0, 10);
+
+      const transformedRows = sortedAndLimitedData.map((item, index) => ({
+        id: item._id, // Keep the backend ID for navigation
+        sequence: index + 1, // Use a separate 'sequence' field for display
+        invoiceNumber: item.invoiceNumber,
+        customerName: item.customer?.name || '',
+        customerAddress: item.customer?.address || '',
+        customerEmail: item.customer?.email || '',
+        customerPhone: item.customer?.phone || '',
+        subtotal: item.subtotal,
+        tax: item.tax,
+        totalAmount: item.totalAmount,
+        status: item.status,
+        issueDate: new Date(item.issueDate).toLocaleDateString(),
+        dueDate: new Date(item.dueDate).toLocaleDateString(),
+        notes: item.notes,
+      }));
+
+      setRows(transformedRows);
+    } catch (error) {
+      setError('Failed to fetch invoice data. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchInvoiceData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div className={styles.container}>
+      <div className={styles.addContainer}>
+        <span className={styles.title}>Tax Invoice</span>
+      </div>
       <div className={styles.tableContainer}>
-        <span className={styles.title}>Recent Invoices</span>
         <DataTable columns={columns} rows={rows} slug="invoices" />
       </div>
     </div>
   );
 };
 
-export default Invoices;
+export default Invoice;

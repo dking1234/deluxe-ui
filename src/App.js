@@ -15,7 +15,6 @@ import Order from './Components/pages/Order';
 import Quotation from './Components/pages/Quotation';
 import DeliveryNote from './Components/DeliveryNote/DeliveryNote';
 import Transaction from './Components/pages/Transactions';
-import SelectRole from './Components/LoginSignup/SelectRole';
 import CustomerDetails from './Components/DetailPages/CustomerDetails/CustomerDetails';
 import EmployeDetails from './Components/DetailPages/EmployeeDetails/EmployeDetails';
 import OrderDetails from './Components/DetailPages/JobOrderDetails/JobOrderDetails';
@@ -30,6 +29,7 @@ import PrivateRoute from './config/PrivateRoute';
 import Notification from './Components/Notification/Notification';
 import { Profile } from './Components/Profile/Profile';
 import Items from './Components/pages/Items';
+import ItemDetails from './Components/DetailPages/ItemDetails/ItemDetails';
 
 function App() {
   return (
@@ -38,7 +38,6 @@ function App() {
         <Router>
           <Routes>
             <Route path="/login" element={<LoginSignup />} />
-            <Route path="/select-role/:id" element={<SelectRole />} />
             <Route path="*" element={
               <PrivateRoute>
                 <div className={styles.appContainer}>
@@ -73,6 +72,7 @@ function App() {
                         <Route path="/notifications" element={<Notification />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/delivery/:id" element={<DeliveryNoteDetails />} />
+                        <Route path="/items/:id" element={<ItemDetails />} />
                       </Routes>
                     </div>
                   </div>

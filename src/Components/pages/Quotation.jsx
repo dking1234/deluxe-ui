@@ -32,22 +32,36 @@
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showAddForm, setShowAddForm] = useState(false);
-
+    
     const fetchQuotationData = async () => {
       try {
+        // Get the token from localStorage
         const token = localStorage.getItem('token');
+    
+        // Ensure the token exists before making the request
+        if (!token) {
+          throw new Error('No token found. Please log in.');
+        }
+    
+        // Make the GET request to fetch quotations
         const response = await axios.get('http://localhost:5000/api/quotations', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-
+    
+        // Check if the response is successful
+        if (response.status !== 200) {
+          throw new Error('Failed to fetch quotation data.');
+        }
+    
+        // Transform the data received from the API
         const transformedRows = response.data.map((item, index) => ({
           id: item._id,
           sequence: index + 1,
           quotationNumber: item.quotationNumber,
-          customerName: item.customer.name,
-          customerEmail: item.customer.email,
+          customerName: item.customer?.name || 'N/A',
+          customerEmail: item.customer?.email || 'N/A',
           issueDate: new Date(item.issueDate).toLocaleDateString(),
           expirationDate: new Date(item.expirationDate).toLocaleDateString(),
           subtotal: item.subtotal,
@@ -56,14 +70,18 @@
           status: item.status,
           notes: item.notes || 'N/A',
         }));
-
+    
+        // Update the state with the transformed data
         setRows(transformedRows);
       } catch (error) {
-        setError('Failed to fetch quotation data. Please try again later.');
+        // Handle any errors that occur during the fetch
+        setError(error.message || 'Failed to fetch quotation data. Please try again later.');
       } finally {
+        // Set loading to false, regardless of success or failure
         setLoading(false);
       }
     };
+    
 
     useEffect(() => {
       fetchQuotationData();
